@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-export default class FAB extends Component {
+// Fab = Floating action button
+
+export default class Fab extends Component {
   render() {
     return (
       <div className="open-search">
