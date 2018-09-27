@@ -1,16 +1,38 @@
 // Importing React library and saving it to a variable named 'React'. Default (not named) import syntax
 import React, { Component } from 'react';
+import { update } from '../BooksAPI';
 
 export default class Book extends Component {
+  handleChange = async e => {
+    try {
+      const shelf = e.target.value;
+      const book = this.props;
+      const result = await update(book, shelf);
+      this.props.moveBook(book, shelf, result);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render() {
     return (
       <li>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=uu1mC6zWNTwC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73pGHfBNSsJG9Y8kRBpmLUft9O4BfItHioHolWNKOdLavw-SLcXADy3CPAfJ0_qMb18RmCa7Ds1cTdpM3dxAGJs8zfCfm8c6ggBIjzKT7XR5FIB53HHOhnsT7a0Cc-PpneWq9zX&source=gbs_api")' }}></div>
+            <div
+              className="book-cover"
+              style={{
+                width: 128,
+                height: 193,
+                backgroundImage: `url(${this.props.imageLinks.thumbnail})`
+              }}
+            />
             <div className="book-shelf-changer">
-              <select>
-                <option value="move" disabled>Move to...</option>
+              <select onChange={this.handleChange} value={this.props.shelf}>
+                <option value="move" disabled>
+                  Move to...
+                </option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
@@ -18,8 +40,8 @@ export default class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">1776</div>
-          <div className="book-authors">David McCullough</div>
+          <div className="book-title">{this.props.title}</div>
+          <div className="book-authors">{this.props.authors[0]}</div>
         </div>
       </li>
     );
