@@ -10,13 +10,14 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
+        {/* Renders first child route or redirect that matches location */}
         <Switch>
-          <Route exact to={"/"} component={Home} />
-        <Route exact to={"/search"} component={Search} />
+          <Route exact path={"/"} component={Home} />
+          <Route exact path={"/search"} component={Search} />
         </Switch>
       </div>
     )
   }
 }
 
-export default BooksApp
+export default BooksApp;
