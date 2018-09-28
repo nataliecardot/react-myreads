@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from './book';
-import * as BooksAPI from '../BooksAPI';
+import { search } from '../BooksAPI';
 
 const searchTerms = [
   'Android',
@@ -90,7 +90,7 @@ export default class Search extends Component {
   updateQuery(query) {
     this.setState({results: []});
     if (this.matched(query)) {
-      BooksAPI.search(query.trim()).then((results) => (this.checkIfSaved(results)));
+      search(query.trim()).then(results => (this.checkIfSaved(results)));
     } else {
       this.setState({results: []});
     }
@@ -101,7 +101,7 @@ export default class Search extends Component {
     let notSaved = results.filter(nb => !this.props.books.some(ob => nb.id === ob.id));
     let alreadySaved = this.props.books.filter(ob => results.some(nb => ob.id === nb.id));
     // return notSaved;
-    this.setState((state) => {
+    this.setState(state => {
       state.results = state.results.concat(notSaved);
       state.results = state.results.concat(alreadySaved);
       return state;
@@ -111,7 +111,7 @@ export default class Search extends Component {
   // Ensures that only provided search terms can be used
   matched = (query) => {
     if (query) {
-      const terms = searchTerms.filter((term) => term.toLowerCase().startsWith(query.toLowerCase()))
+      const terms = searchTerms.filter(term => term.toLowerCase().startsWith(query.toLowerCase()))
       if (terms.length < 1) {
         return false
       } else {
