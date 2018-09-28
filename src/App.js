@@ -4,7 +4,7 @@ import * as BooksAPI from './BooksAPI';
 import './app.css';
 import Search from './components/search';
 import Bookshelf from './components/bookshelf';
-import Title from './components/title';
+import Header from './components/header';
 
 export default class BooksApp extends Component {
   state = {
@@ -54,10 +54,10 @@ export default class BooksApp extends Component {
         />
         <Route exact path='/' render={() => (
           <div className="list-books">
-            <Title/>
+            <Header />
             <div className="list-books-content">
               <div>
-                {shelves.map((shelf) => (<Bookshelf key={shelf.id} books={this.state.books.filter((book) => (book.shelf === shelf.id))} saveBook={this.saveBook} title={shelf.title}/>))}
+                {shelves.map(shelf => (<Bookshelf key={shelf.id} books={this.state.books.filter((book) => (book.shelf === shelf.id))} saveBook={this.saveBook} title={shelf.title}/>))}
               </div>
             </div>
             <div className="open-search">
