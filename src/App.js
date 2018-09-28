@@ -61,7 +61,7 @@ export default class App extends Component {
               </div>
             </div>
             <div className="open-search">
-              <Link to='/search'>Add a book</Link>
+              <Link to="/search" />
             </div>
           </div>
         )}/>

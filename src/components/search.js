@@ -99,8 +99,8 @@ export default class Search extends Component {
   // Checks if book is already on shelf with search results (from BooksAPI) that met the requirement of search input matching provided search terms. The variable notSaved stores books that don't pass the test of their id matching
   checkIfSaved = results => {
     // filter() method creates a new array with elements that pass test implemented by provided function. some() method tests whether at least one element in the array passes the test implemented by the provided callback function
-    let notSaved = results.filter(nb => !this.props.books.some(ob => nb.id === ob.id));
-    let alreadySaved = this.props.books.filter(ob => results.some(nb => ob.id === nb.id));
+    let notSaved = results.filter(foo => !this.props.books.some(bar => foo.id === bar.id));
+    let alreadySaved = this.props.books.filter(bar => results.some(foo => bar.id === foo.id));
     this.setState(state => {
       // concat() method merges two or new arrays. It doesn't change the existing arrays, but returns a new array
       state.results = state.results.concat(notSaved);
@@ -116,12 +116,12 @@ export default class Search extends Component {
       const terms = searchTerms.filter(term => term.toLowerCase().startsWith(query.toLowerCase()));
       // If there are no items in the newly created array (no matches), matched returns false. This true/false value is used in updateQuery function
       if (terms.length < 1) {
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     } else {
-      return false
+      return false;
     }
   }
 

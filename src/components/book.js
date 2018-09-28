@@ -10,6 +10,7 @@ export default class Book extends Component {
   }
 
   saveThisBook = (book, shelf) => {
+    // App component imports renders Bookshelf component instance with saveBook passed in as a prop. The prop is a method on the App component class
     this.props.saveBook(book, shelf);
   }
 
