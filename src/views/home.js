@@ -4,14 +4,19 @@ import Fab from '../components/fab';
 import { getAll } from '../BooksAPI.js';
 
 export default class Home extends Component {
+  // Function is invoked immediately after Home component is inserted into DOM
   async componentDidMount() {
     try {
+      // getAll() returns a promise that resolves to a JSON object containing a collection of book objects; books stores this (settled) promise
       const books = await getAll();
+      // filter method creates new array with all elements that pass the test implemented by the provided function; if book matches listed shelf, it will be added to currentlyReading, read, wantToRead array
+      // Stores books collection in addBooks prop
       this.props.addBooks(books);
     } catch(err) {
       console.log(err);
     }
   }
+
   render() {
     return (
       <div className="list-books">
@@ -35,7 +40,8 @@ export default class Home extends Component {
             moveBook={this.props.moveBook}
           />
         </div>
-          <Fab />
+
+        <Fab />
       </div>
     );
   }

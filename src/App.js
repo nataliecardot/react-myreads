@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './views/home';
 import Search from './views/search';
+// Enables usage of provider to pass down props
 import Provider, { MyContext } from './Provider/';
 import './App.css';
 
@@ -17,11 +18,19 @@ class BooksApp extends Component {
             <Route
               exact path={"/"}
               render={() => (
+                // Consume provider's state
                 <MyContext.Consumer>
                   {context => <Home {...context} />}
                 </MyContext.Consumer>
-            )}/>
-            <Route exact path={"/search"} component={Search} />
+              )}/>
+            <Route
+              exact path={"/search"}
+              render={() => (
+                // Consume provider's state
+                <MyContext.Consumer>
+                  {context => <Search {...context} />}
+                </MyContext.Consumer>
+              )}/>
           </Switch>
         </Provider>
       </div>

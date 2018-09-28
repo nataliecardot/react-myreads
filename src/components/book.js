@@ -7,6 +7,7 @@ export default class Book extends Component {
     try {
       const shelf = e.target.value;
       const book = this.props;
+      // result stores results of BooksAPI update function
       const result = await update(book, shelf);
       this.props.moveBook(book, shelf, result);
       console.log(result);
