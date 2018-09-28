@@ -90,6 +90,7 @@ export default class Search extends Component {
   updateQuery(query) {
     this.setState({results: []});
     if (this.matched(query)) {
+      // search method from BooksAPI returns a promise that resolves to a JSON object containing a collection of a maximum of 20 book objects
       search(query.trim()).then(results => (this.checkIfSaved(results)));
     } else {
       this.setState({results: []});
@@ -97,19 +98,20 @@ export default class Search extends Component {
   }
 
   // Checks if book is already on shelf
-  checkIfSaved = (results) => {
+  checkIfSaved = results => {
+    // filter() method creates a new array with elements that pass test implemented by provided function
     let notSaved = results.filter(nb => !this.props.books.some(ob => nb.id === ob.id));
     let alreadySaved = this.props.books.filter(ob => results.some(nb => ob.id === nb.id));
-    // return notSaved;
     this.setState(state => {
+      // concat() method merges two or new arrays. It doesn't change the existing arrays, but returns a new array
       state.results = state.results.concat(notSaved);
       state.results = state.results.concat(alreadySaved);
       return state;
     })
   }
 
-  // Ensures that only provided search terms can be used
-  matched = (query) => {
+  // Enables usage of provided search terms
+  matched = query => {
     if (query) {
       const terms = searchTerms.filter(term => term.toLowerCase().startsWith(query.toLowerCase()))
       if (terms.length < 1) {
@@ -134,7 +136,7 @@ export default class Search extends Component {
             Close
           </Link>
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" value={query} onChange={(e) => this.updateQuery(e.target.value)}/>
+            <input type="text" placeholder="Search by title or author" value={query} onChange={e => this.updateQuery(e.target.value)}/>
           </div>
         </div>
         <div className="search-books-results">
