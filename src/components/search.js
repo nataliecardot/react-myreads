@@ -133,7 +133,7 @@ export default class Search extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to='/' />
+          <Link className="close-search" to="/" />
           <div className="search-books-input-wrapper">
             <input type="text" placeholder="Search by title or author" value={query} onChange={e => this.updateQuery(e.target.value)}/>
           </div>

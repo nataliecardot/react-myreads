@@ -14,6 +14,7 @@ export default class App extends Component {
 
   // Updates book on server
   saveBook = (book, shelf) => {
+    // This method from BooksAPI returns a promise that resolves to a JSON object containing the response data of the POST request
     update(book, shelf);
     book.shelf = shelf;
     let checkForBook = this.state.books.filter(bookState => (bookState.id !== book.id));
@@ -27,7 +28,7 @@ export default class App extends Component {
       this.setState({books});
     }).then(() => {
       this.setState({
-        // Sets shelves' associated IDs and displayed titles
+        // Sets state of shelves' associated IDs and displayed titles
         shelves: [
           {
             id: 'currentlyReading',
@@ -48,23 +49,23 @@ export default class App extends Component {
     const { shelves } = this.state;
     return (
       <div className="app">
-        <Route path='/search' render={({history}) => (<Search saveBook={(book, shelf) => {
+        <Route path="/search" render={({history}) => (<Search saveBook={(book, shelf) => {
             this.saveBook(book, shelf)
           }} books={this.state.books}/>)}
         />
-        <Route exact path='/' render={() => (
+        <Route exact path="/" render={() => (
           <div className="list-books">
             <Header />
             <div className="list-books-content">
               <div>
-                {shelves.map(shelf => (<Bookshelf key={shelf.id} books={this.state.books.filter(book => (book.shelf === shelf.id))} saveBook={this.saveBook} title={shelf.title}/>))}
+                {shelves.map(shelf => (<Bookshelf key={shelf.id} books={this.state.books.filter(book => (book.shelf === shelf.id))} saveBook={this.saveBook} title={shelf.title} />))}
               </div>
             </div>
             <div className="open-search">
               <Link to="/search" />
             </div>
           </div>
-        )}/>
+        )} />
       </div>
     );
   }
