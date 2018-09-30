@@ -1,3 +1,5 @@
+// TODO: Make search input focused after render, add debounce
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from './book';
@@ -85,22 +87,24 @@ const searchTerms = [
   'iOS'
 ]
 
+// This is a controlled component; source of truth for that search form's state resides inside the component rather than inside the DOM. Called a controlled components because React is controlling the form's state. This enables instant search validation
 export default class Search extends Component {
   // Keeps search result state updated
   updateQuery(query) {
     // Clears existing state data--the results of a previous search, if one was done. Note this is done each time a letter is entered/the search input is changed
     this.setState({results: []});
-    // If matched method returns true (there's a search search result from searchTerms that matches at least at the beginning what's entered in the search bar), executes search method from BooksAPI (imported into this component), which returns a promise that resolves to a JSON object. It takes that JSON object (the "results") and passes in the results to the checkIfSaved method. If the matched method doesn't return true, nothing is displayed because the state is already cleared, and nothing is returned because the search method is not executed
+    // If matched method returns true (there's a search result from searchTerms that matches at least at the beginning what's entered in the search bar), executes BooksAPI's search method, which returns a promise that resolves to a JSON object. It takes that JSON object (the "results") and passes in the results to the checkIfSaved method. If the matched method doesn't return true, nothing is displayed because the state is already cleared, and nothing is returned because the search method is not executed
     if (this.matched(query)) {
       search(query).then(results => (this.checkIfSaved(results)));
     }
   }
 
-  // Checks if book is already on shelf with search results (from BooksAPI) that met the requirement of search input matching provided search terms. The variable notSaved stores books that don't pass the test of their id matching
+  // Checks if book is already on one of the shelves with search results (from BooksAPI) that met the requirement of search input matching provided search terms
   checkIfSaved = results => {
     // filter() method creates a new array with elements that pass test implemented by provided function. some() method tests whether at least one element in the array passes the test implemented by the provided callback function
-    let notSaved = results.filter(foo => !this.props.books.some(bar => foo.id === bar.id));
-    let alreadySaved = this.props.books.filter(bar => results.some(foo => bar.id === foo.id));
+    // Regarding this.props.books: `books={this.state.books}` is passed into Router's render of Search in App component
+    let notSaved = results.filter(result => !this.props.books.some(book => result.id === book.id));
+    let alreadySaved = this.props.books.filter(book => results.some(result => book.id === result.id));
     this.setState(state => {
       // concat() method merges two or new arrays. It doesn't change the existing arrays, but returns a new array
       state.results = state.results.concat(notSaved);
@@ -140,6 +144,7 @@ export default class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
+            {/* books displayed in rendered Book component are set to results. saveBook is method for changing bookshelf defined in App component. This prop was passed to shelf component in App component, which is how it's available here */}
             <Book books={this.state.results} saveBook={saveBook} />
           </ol>
         </div>

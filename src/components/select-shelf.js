@@ -6,14 +6,14 @@ export default class SelectShelf extends Component {
     value: 'none'
   }
 
-  // Calls updateValue, which updates state (the shelf)
+  // Calls updateValue, which updates state (the shelf name, stored in "value")
   handleChange = e => {
     this.updateValue(e.target.value);
-    // saveThisBook prop is passed into the rendering of the SelectShelf component instance in the Book component, in which it is defined as a method, the first parameter being the book and the second being the shelf
+    // saveThisBook prop is passed into the rendering of the SelectShelf component in the Book component, in which it is defined as a method, the first parameter being the book and the second being the shelf
     this.props.saveThisBook(this.props.book, e.target.value);
   }
 
-  // Sets shelf state to option selected
+  // Sets shelf state (value) to option selected
   updateValue = value => {
     this.setState({value});
   }
