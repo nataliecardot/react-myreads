@@ -8,6 +8,7 @@ import App from './app';
  is not required.
 **/
 
+// TODO: See guide to React testing recommended by reviewer, who said React testing is easy with Jest and Enzyme React libraries https://jestjs.io/docs/en/tutorial-react.html. 
 it ('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 // Creates a book
 export default class Book extends Component {
-  // static keyword is part of ES6 syntax and defines a static method; static methods are called on class itself rather than instances of class
+  // static keyword is part of ES6 syntax and defines a static method; static methods are called on class itself rather than instances of class.
+  // Using propTypes helps to prevent runtime errors and eliminates the need to writing many testing files
   static propTypes = {
     books: PropTypes.array
   }
