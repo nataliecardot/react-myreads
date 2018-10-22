@@ -11,8 +11,7 @@ To launch the project:
 1. Clone the repository
 2. Using a command line tool, navigate to the directory's location
 3. Run `npm install`, which installs all modules listed as dependencies in package.json.
-4. Run `npm run build` (runs custom "build" script in package.json)
-5. Run `npm start` to start the development server, opening the app in your default browser. (The command causes node to look for a scripts object in your package.json file, which in this case specifies "react-scripts start.")
+4. Run `npm start` to start the development server, opening the app in your default browser. (The command causes node to look for a scripts object in your package.json file, which in this case specifies "react-scripts start.")
 
 
 ### Dependencies and Acknowledgements
