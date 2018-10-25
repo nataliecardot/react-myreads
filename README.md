@@ -1,15 +1,14 @@
 MyReads
-======
+---
 
 This app, built using React as a project for Udacity's Front-End Web Developer Nanodegree program, allows for sorting books into "currently reading," "want to read," and "read" categories as well as searching for books using a limited set of search terms that are listed in _SEARCH_TERMS.md_.
 
 
 ### Get Started
 
-**[View it live](http://nataliecardot.com/react-myreads)**
+##### View it live [here](http://nataliecardot.com/react-myreads)
 
 **View locally:**
-To launch the project:
 
 1. Clone the repository
 2. Using a command line tool, navigate to the directory's location
