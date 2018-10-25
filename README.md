@@ -6,6 +6,9 @@ This app, built using React as a project for Udacity's Front-End Web Developer N
 
 ### Get Started
 
+**[View it live](http://nataliecardot.com/react-myreads)**
+
+**View locally:**
 To launch the project:
 
 1. Clone the repository
