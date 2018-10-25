@@ -1,6 +1,6 @@
 {
-  "name": "react-my-reads",
-  "homepage": "https://nataliecardot.github.io/react-my-reads/",
+  "name": "react-myreads",
+  "homepage": "https://nataliecardot.github.io/react-myreads/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "prop-types": "^15.6.2",
